@@ -1,0 +1,9 @@
+- name: Installing Maven
+  ansible.builtin.package:
+    name: maven
+    state:  present
+
+- name: Installing Dependencies
+  ansible.builtin.shell: mvn clean package ; mv target/{{component}}{{lookup('vars',component + '_version')}}.jar {{component}}.jar ;
+  args:
+    chdir:  /app

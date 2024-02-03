@@ -1,0 +1,12 @@
+- name: Installing Mysql Client
+  ansible.builtin.package:
+    name: mysql
+    state:  present
+
+- name: Checking Mysql Databse
+  ansible.builtin.shell:  mysql -h {{mysql_host}} -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
+  register: mysqlcount
+
+- name: Loading Schema into Mysql
+  ansible.builtin.shell:  mysql -h {{mysql_host}} -uroot -p{{mysql_password}} < /app/schema/{{component}}.sql
+  when: mysqlcount.stdout == "0"

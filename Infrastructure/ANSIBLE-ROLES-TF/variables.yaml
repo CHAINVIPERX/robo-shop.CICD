@@ -1,0 +1,14 @@
+mongodb_host: mongodb.ladoo.shop
+catalogue_host: catalogue.ladoo.shop
+redis_host: redis.ladoo.shop
+mysql_host: mysql.ladoo.shop
+rabbitmq_host:  rabbitmq.ladoo.shop
+user_host:  user.ladoo.shop
+cart_host:  cart.ladoo.shop
+shipping_host:  shipping.ladoo.shop
+payment_host: payment.ladoo.shop
+#payments_host: payments.ladoo.shop
+dispatch_host:  dispatch.ladoo.shop
+
+ansible_password: DevOps321
+mysql_password: RoboShop@1

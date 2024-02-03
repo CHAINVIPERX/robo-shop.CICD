@@ -1,0 +1,33 @@
+- name: Installing NGINX
+  ansible.builtin.package:
+    name: nginx
+    state:  present
+
+- name: Removing Default Content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/
+    state:  absent
+
+- name: Creating HTML Folder
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state:  directory
+
+- name: "Downloading {{component}} App"
+  ansible.builtin.get_url:
+    url:  "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
+    dest: /tmp
+
+- name: Installing {{component}} App
+  ansible.builtin.unarchive:
+    src:  "/tmp/{{component}}.zip"
+    dest: "/usr/share/nginx/html/"
+    remote_src: yes
+
+- name: Creating Proxy Server
+  ansible.builtin.template:
+    src:  roboshop.conf.j2
+    dest: /etc/nginx/default.d/roboshop.conf
+  notify:
+  - restart nginx
+

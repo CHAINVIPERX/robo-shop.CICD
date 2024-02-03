@@ -1,0 +1,31 @@
+- name: Configuring YUM Erlang Repo
+  ansible.builtin.shell:   curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+
+- name: Configuring YUM Rabbitmq Repo
+  ansible.builtin.shell:  curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
+- name: Installing RabbitMq
+  ansible.builtin.package:
+    name: rabbitmq-server
+    state:  present
+
+- name: Reloading Daemon
+  ansible.builtin.systemd_service:
+    daemon_reload:  true
+
+- name: "Enabling and Starting {{component}} Service"
+  ansible.builtin.service:
+    name: rabbitmq-server
+    state:  restarted
+    enabled:  yes
+
+- name: Creating User and Setting Permissions for RabbitMQ
+  community.rabbitmq.rabbitmq_user:
+    user: "{{lookup('aws_ssm', '/roboshop/{{env}}/rabbitmq_user', region='us-east-1',decrypt=True )}}"
+    password: "{{lookup('aws_ssm', '/roboshop/{{env}}/rabbitmq_pass', region='us-east-1',decrypt=True )}}"
+    vhost:  /
+    configure_priv: .*
+    read_priv:  .*
+    write_priv: .*
+    state:  present
+      # rabbitmqctl add_user roboshop roboshop123 ; rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"

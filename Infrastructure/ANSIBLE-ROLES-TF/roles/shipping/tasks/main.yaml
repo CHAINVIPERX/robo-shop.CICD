@@ -1,0 +1,24 @@
+- name: App Setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup
+
+- name: Configuring App Service
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd-config
+
+- name: Installing Maven
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: java
+
+- name: Configuring Schema
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mysql-schema
+
+- name: Enabling and Restarting App
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: start.yaml
