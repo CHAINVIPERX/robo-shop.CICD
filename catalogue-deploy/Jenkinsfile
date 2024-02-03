@@ -38,6 +38,7 @@ pipeline {
             sh """
             cd terraform/
             terraform init --backend-config=${parms.Environment}/backend.tf -reconfigure
+            """
         }
     }
 }
