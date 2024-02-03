@@ -34,13 +34,13 @@ pipeline {
     }
 
     stage('Terraform Initialization'){
-        steps{
+        steps {
             sh """
             cd terraform/
             terraform init --backend-config=${parms.Environment}/backend.tf -reconfigure
         }
     }
-        
+}
     post {
         always {
             echo "Pipeline execution completed"
