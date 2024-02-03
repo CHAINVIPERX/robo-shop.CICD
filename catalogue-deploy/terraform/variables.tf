@@ -21,7 +21,11 @@ variable "zone_name" {
 variable "tags" {
 
   default = {
-    component = "web"
+    component = "catalogue"
   }
+
+}
+
+variable "app_version" {
 
 }
