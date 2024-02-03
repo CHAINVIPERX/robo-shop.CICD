@@ -1,0 +1,82 @@
+pipeline {
+    agent {
+        node{
+            label 'AGENT-1'
+        }
+    }
+    environment {
+       packageVersion = ''
+       nexusURL= '3.237.91.32:8081'
+    }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds() }
+    
+
+    stages {
+        stage('Version') {
+            steps {
+               script {
+                def packageJson = readJSON file : 'catalogue/package.json'
+                packageVersion = packageJson.version
+                echo "application version : $packageVersion"
+               }
+            }
+        }
+        stage('Install Dependencies'){
+            steps{
+                sh """
+                cd catalogue/
+                npm install
+                """
+            }
+        }
+        stage('Zipping'){
+            steps{
+                sh """
+                cd catalogue/
+                zip -q -r catalogue.zip ./* -x ".git" -x "*.zip"
+                ls -ltr
+                pwd
+                """
+            }
+        }
+        stage('Publish Artifacts') {
+            steps{ 
+                script {
+                     def filePath = "${PWD}/workspace/APPS/catalogue/catalogue/catalogue.zip"
+                      echo "${filePath}"
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: "${nexusURL}",
+                        groupId:'com.roboshop',
+                        version: "${packageVersion}",
+                        repository: 'catalogue',
+                        credentialsId:'nexus-auth',
+                        artifacts: [
+                            [
+                                artifactId: 'catalogue' ,
+                                classifier: '',
+                                file: "${filePath}",
+                                type:'zip'
+                            ]
+                        ]
+                )
+            }
+        }
+    }
+}
+    post {
+        always {
+            echo "Pipeline execution completed"
+            deleteDir()
+        }
+        failure {
+            echo "Pipeline Failed"
+        }
+        success{
+            echo "Pipeline Success"
+        }
+    }
+}
