@@ -46,7 +46,7 @@ pipeline {
     post {
         always {
             echo "Pipeline execution completed"
-            deleteDir()
+            // deleteDir()
         }
         failure {
             echo "Pipeline Failed"
