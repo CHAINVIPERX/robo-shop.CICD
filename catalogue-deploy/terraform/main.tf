@@ -1,6 +1,6 @@
 resource "aws_lb_target_group" "catalogue" {
   name                 = "${local.name}-${var.tags.component}"
-  port                 = 80
+  port                 = 8080
   protocol             = "HTTP"
   vpc_id               = data.aws_ssm_parameter.vpc_id.value
   deregistration_delay = 60
@@ -10,7 +10,7 @@ resource "aws_lb_target_group" "catalogue" {
     unhealthy_threshold = 3
     timeout             = 5
     path                = "/health"
-    port                = 80
+    port                = 8080
     matcher             = "200-299"
   }
 }
