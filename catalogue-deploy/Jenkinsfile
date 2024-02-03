@@ -1,0 +1,47 @@
+pipeline {
+    agent {
+        node{
+            label 'AGENT-1'
+        }
+    }
+    // environment {
+    //    packageVersion = ''
+    //    nexusURL= '3.237.91.32:8081'
+    // }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds() }
+
+    
+     parameters {
+        string(name: 'Version', defaultValue: '', description: 'What is artifact Version?')
+
+        string(name: 'Environment', defaultValue: '', description: 'What is Environment?')
+
+        
+    }
+    
+
+    stages {
+        stage('Print Version') {
+            steps {
+              sh """
+                    echo "version: ${params.Version}"
+                    echo "environment: ${params.Environment}"
+                """
+            }
+        }
+        
+    post {
+        always {
+            echo "Pipeline execution completed"
+            deleteDir()
+        }
+        failure {
+            echo "Pipeline Failed"
+        }
+        success{
+            echo "Pipeline Success"
+        }
+    }
+}
