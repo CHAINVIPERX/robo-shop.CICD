@@ -66,6 +66,17 @@ pipeline {
             }
         }
     }
+    stage('Deploy'){
+        steps{
+            script{
+                    def params = [ 
+                        string(name:'Version',value:"${packageVersion}"),
+                        string(name:'Environment',value:"dev") 
+                        ] 
+                        build job:  "catalogue-deploy" , wait:  true , parameters:params
+            }
+        }
+    }
 }
     post {
         always {
