@@ -1,6 +1,6 @@
 
-data "aws_ssm_parameter" "web_lb_sg_id" {
-  name = "/${var.project_name}/${var.environment}/web_lb_sg_id"
+data "aws_ssm_parameter" "catalogue_lb_sg_id" {
+  name = "/${var.project_name}/${var.environment}/catalogue_lb_sg_id"
 }
 
 
@@ -14,8 +14,8 @@ data "aws_ssm_parameter" "vpc_id" {
 
 }
 
-data "aws_ssm_parameter" "web_sg_id" {
-  name = "/${var.project_name}/${var.environment}/web_sg_id"
+data "aws_ssm_parameter" "catalogue_sg_id" {
+  name = "/${var.project_name}/${var.environment}/catalogue_sg_id"
 
 }
 
@@ -41,9 +41,9 @@ data "aws_ami" "centos8" {
 }
 
 
-data "aws_ssm_parameter" "web_lb_listener_arn" {
+data "aws_ssm_parameter" "catalogue_lb_listener_arn" {
 
-  name = "/${var.project_name}/${var.environment}/web_lb_listener_arn"
+  name = "/${var.project_name}/${var.environment}/catalogue_lb_listener_arn"
 
 }
 
