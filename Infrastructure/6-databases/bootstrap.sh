@@ -6,7 +6,7 @@ pip3.11 install ansible botocore boto3
 
 git clone https://github.com/CHAINVIPERX/robo-shop.CICD.git /tmp/robo-shop.CICD
 
-cd /tmp/robo-shop.CICD/infrastructure/ANSIBLE-ROLES-TF/
+cd /tmp/robo-shop.CICD/Infrastructure/ANSIBLE-ROLES-TF/
 
 ansible-playbook -e component=$component -e env=$environment setup-tf.yaml
 
