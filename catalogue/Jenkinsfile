@@ -12,6 +12,10 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds() }
     
+    parameters{
+        booleanParam(name: 'Deploy',defaultValue: false , description: 'Do you want to Desploy this?')
+    }
+    
 
     stages {
         stage('Version') {
