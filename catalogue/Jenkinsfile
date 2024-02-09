@@ -47,6 +47,7 @@ pipeline {
         stage('SonarQube Scanning'){
             steps{
                 sh """
+                cd catalogue/
                 sonar-scanner
                 """
             }
@@ -58,7 +59,7 @@ pipeline {
                 cd catalogue/
                 zip -q -r catalogue.zip ./* -x ".git" -x "*.zip"
                 ls -ltr
-                #pwd
+                pwd
                 """
             }
         }

@@ -19,6 +19,7 @@ sonar.login=token
 setup nexus
 install nexus
 create repo using create repo option on top
+add nexus ip address in jenkins file
 
 
 
