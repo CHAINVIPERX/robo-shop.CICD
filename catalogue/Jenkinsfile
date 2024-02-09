@@ -31,6 +31,23 @@ pipeline {
                 """
             }
         }
+
+        stage('Unit Tests'){
+            steps{
+                sh """
+               echo "Unit Tests will run here"
+                """
+            }
+        }
+
+        stage('SonarQube Scanning'){
+            steps{
+                sh """
+                sonar-scanner
+                """
+            }
+        }
+
         stage('Zipping'){
             steps{
                 sh """
