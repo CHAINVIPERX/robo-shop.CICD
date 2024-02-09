@@ -6,6 +6,7 @@ Plugins
 -Rebuilder
 add agent in jenkins
 create ssh-auth and nexus-auth
+add shared-library location in system settings of jenkins
 
 
 setup Agent
