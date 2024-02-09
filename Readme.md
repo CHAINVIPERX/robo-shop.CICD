@@ -3,7 +3,10 @@ Plugins
 -Ansicolor
 -pipeline utility steps
 -nexus artifact uploader
+-Rebuilder
 add agent in jenkins
+create ssh-auth and nexus-auth
+
 
 setup Agent
 install java
@@ -15,6 +18,8 @@ sonar.login=token
 
 setup nexus
 install nexus
+create repo using create repo option on top
+
 
 
 

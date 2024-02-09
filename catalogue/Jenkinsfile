@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
        packageVersion = ''
-       nexusURL= '3.237.91.32:8081'
+       nexusURL= ''
     }
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -58,7 +58,7 @@ pipeline {
                 cd catalogue/
                 zip -q -r catalogue.zip ./* -x ".git" -x "*.zip"
                 ls -ltr
-                pwd
+                #pwd
                 """
             }
         }
@@ -66,7 +66,7 @@ pipeline {
             steps{ 
                 script {
                      def filePath = "${PWD}/workspace/APPS/catalogue/catalogue/catalogue.zip"
-                      echo "${filePath}"
+                    //   echo "${filePath}"
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
@@ -88,17 +88,22 @@ pipeline {
         }
     }
     stage('Deploy'){
-        steps{
-            script{
-                    def params = [ 
-                        string(name:'Version',value:"${packageVersion}"),
-                        string(name:'Environment',value:"dev") 
-                        ] 
-                        build job:  "catalogue-deploy" , wait:  true , parameters:params
+        when{
+            expression{
+                param.Deploy = true
+            }
+        }
+            steps{
+                script{
+                        def params = [ 
+                            string(name:'Version',value:"${packageVersion}"),
+                            string(name:'Environment',value:"dev") 
+                            ] 
+                            build job:  "catalogue-deploy" , wait:  true , parameters:params
+                }
             }
         }
     }
-}
     post {
         always {
             echo "Pipeline execution completed"
