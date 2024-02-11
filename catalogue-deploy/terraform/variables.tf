@@ -29,3 +29,7 @@ variable "tags" {
 variable "app_version" {
 
 }
+
+variable "nexus_ip" {
+
+}

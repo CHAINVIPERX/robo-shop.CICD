@@ -4,10 +4,10 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    // environment {
+    environment {
     //    packageVersion = ''
-    //    nexusURL= '3.237.91.32:8081'
-    // }
+       nexusIp = pipelineGlobals.nexusURL()
+    }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
@@ -19,6 +19,8 @@ pipeline {
         string(name: 'Version', defaultValue: '', description: 'What is artifact Version?')
 
         string(name: 'Environment', defaultValue: '', description: 'What is Environment?')
+
+        string(name: 'Nexus_ip', defaultValue: nexusIP , description: 'What is Nexus_ip?')
 
         
     }
@@ -48,7 +50,7 @@ pipeline {
         steps {
             sh """
             cd catalogue-deploy/terraform/
-            terraform plan -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version}"
+            terraform plan -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}"
             """
         }
     }
@@ -57,7 +59,7 @@ pipeline {
         steps {
             sh """
             cd catalogue-deploy/terraform/
-            terraform apply -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version}" -auto-approve
+            terraform apply -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}" -auto-approve
             """
         }
     }

@@ -12,5 +12,5 @@ payment_host: payment.app-dev.ladoo.shop
 dispatch_host:  dispatch.app-dev.ladoo.shop
 ansible_password: DevOps321
 mysql_password: RoboShop@1
-nexus_url:  http://3.237.91.32:8081/repository
+nexus_url:  "http://{{nexus_ip}}/repository"
 group_id: "com/roboshop"

@@ -12,5 +12,6 @@ module "catalogue" {
   zone_name            = var.zone_name
   priority_rule        = 40
   app_version          = var.app_version
+  nexus_ip             = var.nexus_ip
 
 }

@@ -50,3 +50,7 @@ variable "priority_rule" {
 variable "app_version" {
 
 }
+
+variable "nexus_ip" {
+
+}
