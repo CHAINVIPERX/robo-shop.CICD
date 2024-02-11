@@ -37,29 +37,38 @@ pipeline {
         }
     
 
-    stage('Terraform Initialization'){
-        steps {
-            sh """
-            cd catalogue-deploy/terraform/
-            terraform init --backend-config=${params.Environment}/backend.tf -reconfigure
-            """
-        }
-    }
+    // stage('Terraform Initialization'){
+    //     steps {
+    //         sh """
+    //         cd catalogue-deploy/terraform/
+    //         terraform init --backend-config=${params.Environment}/backend.tf -reconfigure
+    //         """
+    //     }
+    // }
 
-    stage('Terraform Plan'){
-        steps {
-            sh """
-            cd catalogue-deploy/terraform/
-            terraform plan -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}"
-            """
-        }
-    }
+    // stage('Terraform Plan'){
+    //     steps {
+    //         sh """
+    //         cd catalogue-deploy/terraform/
+    //         terraform plan -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}"
+    //         """
+    //     }
+    // }
+  
 
-    stage('Terraform Apply'){
+    // stage('Terraform Apply'){
+    //     steps {
+    //         sh """
+    //         cd catalogue-deploy/terraform/
+    //         terraform apply -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}" -auto-approve
+    //         """
+    //     }
+    // }
+    stage('Terraform Destroy'){
         steps {
             sh """
             cd catalogue-deploy/terraform/
-            terraform apply -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}" -auto-approve
+            terraform destroy -var-file=${params.Environment}/${params.Environment}.tfvars -var="app_version=${params.Version} -var="nexus_ip=${params.Nexus_ip}" -auto-approve
             """
         }
     }
