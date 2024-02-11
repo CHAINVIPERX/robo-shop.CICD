@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "ladoo-loadbal"
+    bucket         = "ladoo-main"
     key            = "databases-lb"
     region         = "us-east-1"
-    dynamodb_table = "ladoo-locking-loadbal"
+    dynamodb_table = "ladoo-locking-main"
   }
 }
 
