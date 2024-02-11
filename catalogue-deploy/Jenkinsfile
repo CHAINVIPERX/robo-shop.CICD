@@ -4,10 +4,10 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    environment {
-    //    packageVersion = ''
-       nexusIp = pipelineGlobals.nexusURL()
-    }
+    // environment {
+    // //    packageVersion = ''
+    //    nexusIp = ''
+    // }
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
@@ -20,7 +20,7 @@ pipeline {
 
         string(name: 'Environment', defaultValue: '', description: 'What is Environment?')
 
-        string(name: 'Nexus_ip', defaultValue: nexusIP , description: 'What is Nexus_ip?')
+        string(name: 'Nexus_ip', defaultValue: '' , description: 'What is Nexus_ip?')
 
         
     }
