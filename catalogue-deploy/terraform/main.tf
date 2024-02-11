@@ -11,5 +11,6 @@ module "catalogue" {
   tags                 = var.tags
   zone_name            = var.zone_name
   priority_rule        = 40
+  app_version          = var.app_version
 
 }
