@@ -47,3 +47,6 @@ variable "app_lb_listener_arn" {
 variable "priority_rule" {
 
 }
+variable "app_version" {
+
+}
