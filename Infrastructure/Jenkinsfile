@@ -33,7 +33,7 @@ pipeline {
         stage('VPC') {
             steps {
                 sh """
-                cd 1-vpc
+                cd Infrastructure/1-vpc
                 terraform init
                 terraform apply -auto-approve
                 """
@@ -42,7 +42,7 @@ pipeline {
         stage('Security Groups') {
             steps {
                 sh """
-                cd 2-sec-grps
+                cd Infrastructure/2-sec-grps
                 terraform init
                 terraform apply -auto-approve
                 """
@@ -51,7 +51,7 @@ pipeline {
         stage('VPN') {
             steps {
                 sh """
-                cd 3-vpn
+                cd Infrastructure/3-vpn
                 terraform init
                 terraform apply -auto-approve
                 """
@@ -62,7 +62,7 @@ pipeline {
                 stage('Data-Bases'){
                     steps{
                         sh """
-                        cd 6-databases
+                        cd Infrastructure/6-databases
                         terraform init
                         terraform apply -auto-approve
                         """
@@ -71,7 +71,7 @@ pipeline {
                 stage('App-LB'){
                     steps{
                         sh """
-                        cd 5-app-lb
+                        cd Infrastructure/5-app-lb
                         terraform init
                         terraform apply -auto-approve
                         """
