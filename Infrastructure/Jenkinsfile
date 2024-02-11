@@ -57,15 +57,6 @@ pipeline {
                 """
             }
         }
-        stage('VPC') {
-            steps {
-                sh """
-                cd 1-vpc
-                terraform init
-                terraform apply -auto-approve
-                """
-            }
-        }
         stage('Data-Bases and App-LB'){
             parallel{
                 stage('Data-Bases'){
