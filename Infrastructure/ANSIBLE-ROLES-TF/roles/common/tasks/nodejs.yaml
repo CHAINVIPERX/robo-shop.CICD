@@ -6,7 +6,7 @@
     name: nodejs
     state:  present
 
-- name: Installing Dependencies
-  ansible.builtin.shell:  npm install ;
-  args:
-    chdir:  /app
+# - name: Installing Dependencies
+#   ansible.builtin.shell:  npm install ;
+#   args:
+#     chdir:  /app

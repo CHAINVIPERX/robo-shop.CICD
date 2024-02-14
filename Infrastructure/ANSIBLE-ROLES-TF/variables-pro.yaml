@@ -12,3 +12,5 @@ dispatch_host:  dispatch-pro.ladoo.shop
 
 ansible_password: DevOps321
 mysql_password: RoboShop@1
+nexus_url:  "http://{{nexus_ip}}/repository"
+group_id: "com/roboshop"
